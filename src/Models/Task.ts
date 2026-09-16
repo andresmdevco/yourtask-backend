@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-export type ITask = Document & {
+export interface ITask extends Document {
   name: string;
   description: string;
 };
