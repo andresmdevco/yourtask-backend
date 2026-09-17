@@ -42,9 +42,13 @@ router.delete(
 );
 
 /** Routes for tasks */
-router.post('/:projectId/tasks',
+router.post(
+  '/:projectId/tasks',
   validateProjectExists,
-  TaskController.createTask
+  body('name').notEmpty().withMessage('El Nombre de la tarea es Obligatorio'),
+  body('description').notEmpty().withMessage('La descripción de la tarea es Obligatoria'),
+  handleInputErrors,
+  TaskController.createTask,
 );
 
 export default router;
