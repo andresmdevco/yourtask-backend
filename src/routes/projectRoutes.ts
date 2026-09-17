@@ -7,8 +7,7 @@ import { validateProjectExists } from '../middleware/project';
 
 const router = Router();
 
-router.post(
-  '/',
+router.post('/',
   body('projectName').notEmpty().withMessage('El Nombre del Proyecto es Obligatorio'),
   body('clientName').notEmpty().withMessage('El Nombre del Cliente es Obligatorio'),
   body('description').notEmpty().withMessage('La Descripción del Proyecto es Obligatoria'),
@@ -17,15 +16,13 @@ router.post(
 );
 router.get('/', ProjectController.getAllProjects);
 
-router.get(
-  '/:id',
+router.get('/:id',
   param('id').isMongoId().withMessage('ID no válido'),
   handleInputErrors,
   ProjectController.getProjectById,
 );
 
-router.put(
-  '/:id',
+router.put('/:id',
   param('id').isMongoId().withMessage('ID no válido'),
   body('projectName').notEmpty().withMessage('El Nombre del Proyecto es Obligatorio'),
   body('clientName').notEmpty().withMessage('El Nombre del Cliente es Obligatorio'),
@@ -34,21 +31,24 @@ router.put(
   ProjectController.updateProject,
 );
 
-router.delete(
-  '/:id',
+router.delete('/:id',
   param('id').isMongoId().withMessage('ID no válido'),
   handleInputErrors,
   ProjectController.deleteProject,
 );
 
 /** Routes for tasks */
-router.post(
-  '/:projectId/tasks',
+router.post('/:projectId/tasks',
   validateProjectExists,
   body('name').notEmpty().withMessage('El Nombre de la tarea es Obligatorio'),
   body('description').notEmpty().withMessage('La descripción de la tarea es Obligatoria'),
   handleInputErrors,
   TaskController.createTask,
+);
+
+router.get('/:projectId/tasks',
+  validateProjectExists,
+  TaskController.getProjectTask,
 );
 
 export default router;
