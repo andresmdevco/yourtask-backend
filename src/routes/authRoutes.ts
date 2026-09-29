@@ -17,7 +17,7 @@ router.post(
     }
     return true;
   }),
-  body('email').isEmail().withMessage('Email no válido'),
+  body('email').isEmail().withMessage('E-mail no válido'),
   handleInputErrors,
   AuthController.createAccount,
 );
@@ -27,6 +27,14 @@ router.post(
   body('token').notEmpty().withMessage('El Token no puede ir vacío'),
   handleInputErrors,
   AuthController.confirmAccount,
+);
+
+router.post(
+  '/login',
+  body('email').isEmail().withMessage('E-mail no válido'),
+  body('password').notEmpty().withMessage('El password no puede ir vacío'),
+  handleInputErrors,
+  AuthController.login,
 );
 
 export default router;
