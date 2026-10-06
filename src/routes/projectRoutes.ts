@@ -100,4 +100,10 @@ router.post('/:projectId/team',
   TeamMemberController.addMemberById,
 );
 
+router.delete('/:projectId/team',
+  body('id').isMongoId().withMessage('ID No válido'),
+  handleInputErrors,
+  TeamMemberController.removeMemberById,
+);
+
 export default router;
