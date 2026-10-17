@@ -77,4 +77,14 @@ router.post(
 
 router.get('/user', authenticate, AuthController.user);
 
+/** Profile */
+router.put(
+  '/profile',
+  authenticate,
+  body('name').notEmpty().withMessage('El nombre no puede ir vacío'),
+  body('email').isEmail().withMessage('E-mail no válido'),
+  handleInputErrors,
+  AuthController.updateProfile,
+);
+
 export default router;
