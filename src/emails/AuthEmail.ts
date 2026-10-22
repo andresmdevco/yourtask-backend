@@ -9,7 +9,7 @@ interface IEmail {
 
 export class AuthEmail {
   static sendConfirmationEmail = async (user: IEmail) => {
-    const { data, error } = await resend.emails.send({
+    const { data } = await resend.emails.send({
       from: 'YourTask <admin@yourtask.tech>',
       to: user.email,
       subject: 'YourTask - Confirma tu cuenta',
@@ -22,17 +22,11 @@ export class AuthEmail {
         <p>Este token expira en 10 minutos.</p>
       `,
     });
-
-    if (error) {
-      console.error('Error enviando correo de confirmación:', error);
-      throw new Error('No se pudo enviar el correo de confirmación');
-    }
-
     console.log('Correo de confirmación enviado:', data.id);
   };
 
   static sendPasswordResetToken = async (user: IEmail) => {
-    const { data, error } = await resend.emails.send({
+    const { data } = await resend.emails.send({
       from: 'YourTask <admin@yourtask.tech>',
       to: user.email,
       subject: 'YourTask - Restablece tu contraseña',
@@ -45,12 +39,6 @@ export class AuthEmail {
         <p>Este token expira en 10 minutos.</p>
       `,
     });
-
-    if (error) {
-      console.error('Error enviando correo de recuperación:', error);
-      throw new Error('No se pudo enviar el correo de recuperación');
-    }
-
     console.log('Correo de recuperación enviado:', data.id);
   };
 }
