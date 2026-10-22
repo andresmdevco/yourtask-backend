@@ -10,7 +10,7 @@ interface IEmail {
 export class AuthEmail {
   static sendConfirmationEmail = async (user: IEmail) => {
     const { data, error } = await resend.emails.send({
-      from: 'YourTask <onboarding@resend.dev>',
+      from: 'YourTask <admin@yourtask.tech>',
       to: user.email,
       subject: 'YourTask - Confirma tu cuenta',
       text: `Hola ${user.name}, confirma tu cuenta de YourTask usando el código: ${user.token}. Este token expira en 10 minutos.`,
@@ -33,7 +33,7 @@ export class AuthEmail {
 
   static sendPasswordResetToken = async (user: IEmail) => {
     const { data, error } = await resend.emails.send({
-      from: 'YourTask <onboarding@resend.dev>',
+      from: 'YourTask <admin@yourtask.tech>',
       to: user.email,
       subject: 'YourTask - Restablece tu contraseña',
       text: `Hola ${user.name}, usa el código ${user.token} para restablecer tu contraseña. Este token expira en 10 minutos.`,
